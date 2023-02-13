@@ -1,0 +1,5 @@
+parameters:
+
+services:
+    Luckyseven\Bundle\LuckysevenPaginationBundle\Service\PaginationService:
+        arguments: [ '%luckyseven_pagination.default_size%', '%luckyseven_pagination.allowed_sizes%' ]

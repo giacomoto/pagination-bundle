@@ -1,0 +1,22 @@
+{
+    "name": "luckyseven/pagination",
+    "description": "Symfony Pagination Bundle",
+    "type": "symfony-bundle",
+    "minimum-stability": "stable",
+    "version": "1.0",
+    "license": "MIT",
+    "require": {
+        "doctrine/doctrine-bundle": "^2.8",
+        "doctrine/orm": "^2.14"
+    },
+    "autoload": {
+        "psr-4": {
+            "Luckyseven\\Bundle\\LuckysevenPaginationBundle\\": ""
+        }
+    },
+    "authors": [
+        {
+            "name": "Luckyseven S.r.l."
+        }
+    ]
+}
