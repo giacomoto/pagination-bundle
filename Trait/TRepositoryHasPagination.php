@@ -15,7 +15,7 @@ trait TRepositoryHasPagination
      * @param QueryBuilder $queryBuilder
      * @return array
      */
-    protected function paginated(Pagination $pagination, QueryBuilder $queryBuilder): array
+    function paginated(Pagination $pagination, QueryBuilder $queryBuilder): array
     {
         return $queryBuilder
             ->setFirstResult(($pagination->getPage() - 1) * $pagination->getSize())
@@ -28,7 +28,7 @@ trait TRepositoryHasPagination
      * @param QueryBuilder|null $queryBuilder
      * @return int
      */
-    protected function paginatedTotal(?QueryBuilder $queryBuilder = null): int
+    function paginatedTotal(?QueryBuilder $queryBuilder = null): int
     {
         if (!$queryBuilder) {
             $queryBuilder = $this->createQueryBuilder('xx')
