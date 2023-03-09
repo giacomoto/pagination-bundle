@@ -2,7 +2,7 @@
 Luckyseven Pagination Bundle
 
 ## Update composer.json and register the repositories
-```
+```json
 {
     ...
     "repositories": [
@@ -27,7 +27,7 @@ git config --global --add safe.directory /var/www/html/vendor/luckyseven/paginat
 ```
 
 ## Install
-```
+```bash
 composer require symfony/orm-pack
 
 composer require luckyseven/pagination:dev-main
@@ -53,10 +53,32 @@ class UserRepository extends ServiceEntityRepository implements IRepositoryHasPa
 {
     use TRepositoryHasPagination;
 
+    // Simple pagination
     public function findAllPaginated(Pagination $pagination): PaginatedData
     {
         $data = $this->paginated($pagination, $this->createQueryBuilder('u')
             ->orderBy('u.createdAt', 'ASC'));
+
+        $total = $this->paginatedTotal();
+
+        return new PaginatedData($data, $total);
+    }
+    
+    // With custom QueryBuilder
+    public function findAllUserPaginated(Pagination $pagination): PaginatedData
+    {
+        $queryBuilder1 = $this->createQueryBuilder('u');
+        $queryBuilder1
+            ->where('u.roles IN :role')
+            ->setParameter('role', '%ROLE_USER%');
+
+        $data = $this->paginated($pagination, $queryBuilder1);
+
+        $queryBuilder2 = $this->createQueryBuilder('u');
+        $queryBuilder2
+            ->select('count(u.id)')
+            ->where('u.roles IN :role')
+            ->setParameter('role', '%ROLE_USER%');
 
         $total = $this->paginatedTotal();
 
